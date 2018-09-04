@@ -1,0 +1,21 @@
+/* Your app styles here */
+li.add_button {
+  text-align: center;
+  margin: 1em;
+  padding-bottom: 0.5em;
+}
+
+i.add_button{
+  cursor: pointer;
+}
+
+.nav_right{
+  margin-right: 2em;
+  cursor: pointer;
+}
+
+i.reload_button{
+  cursor: pointer;
+  margin-left: 0.5em;
+  font-size: 85%;
+}
