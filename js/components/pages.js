@@ -16,7 +16,7 @@ var pages = {
 
       } else if (!response.userCtx.name) {
         // nobody's logged in
-                
+
         var sessionEndError = app.notification.create({
           icon: '<i class="f7-icons">bolt</i>',
           title: 'Session Ended',
@@ -83,7 +83,7 @@ var pages = {
 
   dbSetup: function(username){
 
-    dbUser = new PouchDB('http://' + httpDatabase + '/userdb-' +  toHex(username),
+    dbUser = new PouchDB('https://' + httpDatabase + '/userdb-' +  toHex(username),
     {
       fetch(url, opts){
         opts.credentials='include'
