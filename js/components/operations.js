@@ -2,7 +2,6 @@
 var operations = {};
 
 operations = {
-  page: $$('.page[data-name="operation"]')[0].f7Page,
 
   add_button: function(){
     var selector = "#add_button_steps";
@@ -15,11 +14,12 @@ operations = {
 
   initialized: function() {
     //Operation's Data **************
+    var page = $$('.page[data-name="operation"]')[0].f7Page;
 
     //initialize the operation's Data
 
-    $$('#opertionInputName').val(operations.page.route.context.name);
-    $$('#opertionInputDescription').val(operations.page.route.context.description);
+    $$('#opertionInputName').val(page.route.context.name);
+    $$('#opertionInputDescription').val(page.route.context.description);
 
     //Sets the add step add_button
 
@@ -28,10 +28,10 @@ operations = {
     //Check for changes in the data
 
     $$('.operationsInputs').change(function(e){
-      dbUser.get(operations.page.route.params.id).then(function(doc) {
+      dbUser.get(page.route.params.id).then(function(doc) {
         if($$("#opertionInputName").val() != ""){
           doc.name = $$("#opertionInputName").val();
-        }    
+        }
         doc.description = $$("#opertionInputDescription").val();
         return dbUser.put(doc);
       }).then(function(response) {
@@ -53,7 +53,7 @@ operations = {
     $$("#deleteOperation").on("click", function(){
       app.dialog.confirm('Are you sure you want to delete this operation?', function () {
 
-        dbUser.get(operations.page.route.params.id).then(function(doc) {
+        dbUser.get(page.route.params.id).then(function(doc) {
           dbUser.remove(doc).then(function(result){
             app.dialog.alert('This operation has been deleted.', function(){
 
@@ -82,6 +82,7 @@ operations = {
 
 var operationsFunctions = {
   addStep: function(namePass) {
+    var page = $$('.page[data-name="operation"]')[0].f7Page;
 
     if(name.trim() == ""){
       name = "Operation";
@@ -113,7 +114,7 @@ var operationsFunctions = {
         notificationSuccess.open();
 
       } else {
-        dbUser.get(operations.page.route.params.id).then(function(doc) {
+        dbUser.get(page.route.params.id).then(function(doc) {
 
           if(doc.steps){
             doc.steps.push({doc: {name: namePass}});

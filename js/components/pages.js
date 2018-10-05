@@ -24,7 +24,7 @@ var pages = {
           closeButton: true,
         });
 
-        notificationSuccess.open();
+        sessionEndError.open();
 
       } else {
         // response.userCtx.name is the current user
@@ -32,7 +32,6 @@ var pages = {
         //if logged In
 
         //initial the home page ***********
-        templating.operationsList();
 
         $$('#create_user').attr('href', '');
         $$('#login_logout').attr('href', '');
@@ -45,6 +44,14 @@ var pages = {
             if (err) {
               // network error
             }
+
+            dbUser.destroy(function (err, response) {
+              if (err) {
+                return console.log(err);
+              } else {
+                dbUser = new PouchDB('localDB');
+              }
+            });
             $$('#create_user').attr('href', '/create-account/');
             $$('#login_logout').attr('href', '/login/');
             $$('#create_user').text('Create Account');
@@ -83,27 +90,37 @@ var pages = {
 
   dbSetup: function(username){
 
-    dbUser = new PouchDB('https://' + httpDatabase + '/userdb-' +  toHex(username),
+    dbOnline = new PouchDB('https://' + httpDatabase + '/userdb-' +  toHex(username),
     {
       fetch(url, opts){
-        opts.credentials='include'
-        return PouchDB.fetch(url, opts)
+        opts.credentials='include';
+        return PouchDB.fetch(url, opts);
       },
     }
-    // skip_setup: true}
   );
+
+  console.log(dbOnline);
+  dbUser.replicate.from(dbOnline).on('complete', function(info) {
+    // then two-way, continuous, retriable sync
+
+    console.log("done");
+    templating.operationsList();
+    dbUser.sync(dbOnline, {live: true});
+
+  }).on('error', function(){
+    templating.operationsList();
+  });
+
+
+  // skip_setup: true}
+
+
 },
 
 operations: function(){
   //Loads in operstions Javascript file
-  $.getScript( "js/components/operations.js" )
-  .done(function( script, textStatus ) {
-    console.log( textStatus );
-    templating.stepsList();
-  })
-  .fail(function( jqxhr, settings, exception ) {
-    $( "div.log" ).text( "Triggered ajaxError handler." );
-  });
+  templating.stepsList();
+
 
 },
 
