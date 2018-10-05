@@ -95,32 +95,14 @@ var pages = {
 },
 
 operations: function(){
-
-  $$("#deleteOperation").on("click", function(){
-    app.dialog.confirm('Are you sure you want to delete this operation?', function () {
-      var page = $$('.page[data-name="operation"]')[0].f7Page;
-
-      dbUser.get(page.router.currentRoute.params.id).then(function(doc) {
-        dbUser.remove(doc).then(function(result){
-          app.dialog.alert('This operation has been deleted.', function(){
-
-            app.popover.close();
-            app.router.navigate('/');
-
-          });
-
-        }).catch(function(err){
-
-          console.log(err);
-
-        });
-      }).then(function (result) {
-        // handle result
-      }).catch(function (err) {
-        console.log(err);
-      });
-
-    });
+  //Loads in operstions Javascript file
+  $.getScript( "js/components/operations.js" )
+  .done(function( script, textStatus ) {
+    console.log( textStatus );
+    templating.stepsList();
+  })
+  .fail(function( jqxhr, settings, exception ) {
+    $( "div.log" ).text( "Triggered ajaxError handler." );
   });
 
 },

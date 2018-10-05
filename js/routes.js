@@ -34,8 +34,14 @@ routes = [
     path: '/operation/:id/:name/',
     templateUrl: './pages/operation.html',
     on: {
-      pageInit: function () {
-        pages.operations();
+      pageInit: function (e, page) {
+        dbUser.get(page.route.params.id).then(function (doc) {
+          // handle doc
+          page.route.context = doc;
+          pages.operations();
+        }).catch(function (err) {
+          console.log(err);
+        });
       },
     },
   },

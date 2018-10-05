@@ -1,10 +1,6 @@
 var home = {
   initialized: function(){
-
     home.add_button();
-
-
-
   },
 
   add_button: function(){
