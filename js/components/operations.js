@@ -117,10 +117,10 @@ var operationsFunctions = {
         dbUser.get(page.route.params.id).then(function(doc) {
 
           if(doc.steps){
-            doc.steps.push({doc: {name: namePass}});
+            doc.steps.push({doc: {name: namePass, average_time: "N/A"}});
           }
           else{
-            doc.steps = [{doc: {name: namePass}}];
+            doc.steps = [{doc: {name: namePass, average_time: "N/A"}}];
           }
 
           return dbUser.put(doc);

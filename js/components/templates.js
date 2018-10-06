@@ -19,12 +19,22 @@ template.operations_list = " \
 
 
 template.steps_list = " \
-<div class='list links-list'> \
+<div class='list sortable'> \
   <ul>\
     {{#each steps}} \
-      <li id = '{{@index}}/{{doc.name}}'><a href='/step/{{@index}}/{{doc.name}}/'> \
-      {{doc.name}} \
-      </a></li> \
+      <li id = '{{@index}}/{{doc.name}}'>\
+        <a href='/step/{{@index}}/{{doc.name}}/'  class='item-link item-content'> \
+          <div class='item-inner'>\
+            <div class='item-title'>\
+                {{doc.name}} \
+            </div>\
+            <div class='item-after'>\
+              {{doc.average_time}}\
+            </div>\
+          </div>\
+        </a>\
+        <div class='sortable-handler'></div>\
+      </li> \
     {{/each}} \
     <li class = 'add_button' id = 'add_button_steps'><i class='add_button f7-icons'>add_round</i></li> \
   </ul> \

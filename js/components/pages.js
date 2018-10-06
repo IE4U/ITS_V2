@@ -65,27 +65,17 @@ var pages = {
 
   login: function(){
     console.log('Page initialized');
+    login.initialized();
     app.popover.close();
-    $.getScript( "js/components/login.js" )
-    .done(function( script, textStatus ) {
-      console.log( textStatus );
-    })
-    .fail(function( jqxhr, settings, exception ) {
-      $( "div.log" ).text( "Triggered ajaxError handler." );
-    });
+
 
   },
 
   create_account: function(){
     console.log('Page initialized');
     app.popover.close();
-    $.getScript( "js/components/login.js" )
-    .done(function( script, textStatus ) {
-      console.log( textStatus );
-    })
-    .fail(function( jqxhr, settings, exception ) {
-      $( "div.log" ).text( "Triggered ajaxError handler." );
-    });
+    login.initialized();
+
   },
 
   dbSetup: function(username){
@@ -100,20 +90,23 @@ var pages = {
   );
 
   console.log(dbOnline);
-  dbUser.replicate.from(dbOnline).on('complete', function(info) {
-    // then two-way, continuous, retriable sync
 
-    console.log("done");
-    templating.operationsList();
-    dbUser.sync(dbOnline, {live: true});
+  dbUser.close(function(){
+    dbUser = new PouchDB('localDB');
+    dbUser.replicate.from(dbOnline).on('complete', function(info) {
+      // then two-way, continuous, retriable sync
 
-  }).on('error', function(){
-    templating.operationsList();
+      console.log("done");
+      templating.operationsList();
+      dbUser.sync(dbOnline, {live: true});
+
+    }).on('error', function(){
+      templating.operationsList();
+    });
+
   });
 
-
   // skip_setup: true}
-
 
 },
 

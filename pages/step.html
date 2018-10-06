@@ -1,4 +1,4 @@
-<div class="page" data-name="operation">
+<div class="page" data-name="step">
   <div class="navbar">
     <div class="navbar-inner">
       <div class="left">
@@ -9,7 +9,7 @@
       </div>
       <div class="title">{{$route.params.name}}</div>
       <div class="right">
-        <a class="link popover-open" href="#" data-popover=".popover-links"><i id = "operationsPanelButton" class='f7-icons'>more_vertical_round_fill</i></a>
+        <a class="link popover-open" href="#" data-popover=".popover-links"><i id = "stepsPanelButton" class='f7-icons'>more_vertical_round_fill</i></a>
       </div>
     </div>
   </div>
@@ -17,7 +17,7 @@
     <div class="popover-inner">
       <div class="list">
         <ul>
-          <li><a id = "deleteOperation" class="list-button item-link" style="color: red" href="#"  data-confirm="Are you sure want to delete this item?" data-confirm-title="Delete?">Delete</a></li>
+          <li><a id = "deleteStep" class="list-button item-link" style="color: red" href="#"  data-confirm="Are you sure want to delete this item?" data-confirm-title="Delete?">Delete</a></li>
         </ul>
       </div>
     </div>
@@ -34,7 +34,7 @@
             <div class="item-inner">
               <div class="item-title item-label">Name</div>
               <div class="item-input-wrap">
-                <input class = "operationsInputs" type="text" id = "opertionInputName"></input>
+                <input class = "stepsInputs" type="text" id = "stepInputName"></input>
                 <span class="input-clear-button"></span>
               </div>
             </div>
@@ -43,7 +43,7 @@
             <div class="item-inner">
               <div class="item-title item-label">Description</div>
               <div class="item-input-wrap">
-                <textarea class = "operationsInputs" id = "opertionInputDescription"></textarea>
+                <textarea class = "stepsInputs" id = "stepInputDescription"></textarea>
                 <span class="input-clear-button"></span>
               </div>
             </div>
@@ -59,9 +59,22 @@
     </div>
 
     <div class="card card-outline">
+      <h1 style = "text-align: center" >Test</h1>
+    </div>
+
+    <div class="block">
+      <div class="block">
+        <div class="row">
+          <button class="button col button-fill button-round color-gray button-big">Reset</button>
+          <button class="button col button-fill button-round color-green button-big" >Start</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card card-outline">
       <div class="card-header">
-        Steps
-        <a class="link sortable-toggle" data-sortable=".sortable">Sort</a>
+        Times
       </div>
       <ul>
         <div id="stepslink_output"></div>

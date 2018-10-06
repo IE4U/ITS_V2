@@ -141,20 +141,14 @@ login.signUp = function() {
 
 }
 
+login.initialized = function(){
+  //Login in form
+  $$( "#SignIn" ).click(function( event ) {
+    login.signIn();
+  });
 
-//Login in form
-$$( "#SignIn" ).click(function( event ) {
-  login.signIn();
-});
+  $$( "#CreateSubmit" ).on('click', function(e) {
+    login.signUp();
+  });
 
-
-
-$$( "#CreateSubmit" ).on('click', function(e) {
-  login.signUp();
-});
-
-// $$(document).keypress(function(e) {
-//     if(e.which == 13) {
-//         $$()
-//     }
-// });
+}

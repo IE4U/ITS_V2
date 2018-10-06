@@ -45,4 +45,13 @@ routes = [
       },
     },
   },
+  {
+    path: '/step/:index/:name/',
+    templateUrl: './pages/step.html',
+    on: {
+      pageInit: function () {
+
+      },
+    }
+  },
 ];
