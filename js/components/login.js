@@ -31,7 +31,7 @@ login.signIn = function(){
     if(response){
       //messageBox.Show("Success", "alert-success");
 
-      //sessionStorage.setItem('password', $$( "#LoginPassword" ).val());
+      sessionStorage.setItem('username', $$( "#LoginEmail" ).val());
 
       $$('create_user').text($$( "#LoginEmail" ).val());
 
