@@ -16,15 +16,14 @@ var pages = {
   },
 
   login: function(){
-    console.log('Page initialized');
+
     login.initialized();
     app.popover.close();
-
 
   },
 
   create_account: function(){
-    console.log('Page initialized');
+
     app.popover.close();
     login.initialized();
 
@@ -41,9 +40,8 @@ var pages = {
     }
   );
 
-
-
   dbUser = new PouchDB('localDB');
+
   dbUser.replicate.from(dbOnline).on('complete', function(info) {
     // then two-way, continuous, retriable sync
     success.general();

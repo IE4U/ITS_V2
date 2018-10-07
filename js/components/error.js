@@ -4,7 +4,6 @@ var error = {
   },
 }
 
-
 var success = {
   general: function(){
     sessionStorage.setItem('setup', 'True');

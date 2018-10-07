@@ -88,54 +88,26 @@ var operationsFunctions = {
       name = "Operation";
     }
 
-    db.getSession(function (err, response) {
-      if (err) {
-        // network error
+    dbUser.get(page.route.params.id).then(function(doc) {
 
-        var sessionError = app.notification.create({
-          icon: '<i class="f7-icons">flag_fill</i>',
-          title: 'An Error Occured',
-          text: err.message,
-          closeButton: true,
-        });
-
-        sessionError.open();
-
-      } else if (!response.userCtx.name) {
-        // nobody's logged in
-
-        var sessionEndError = app.notification.create({
-          icon: '<i class="f7-icons">bolt</i>',
-          title: 'Session Ended',
-          text: 'Please login in again to create a new session',
-          closeButton: true,
-        });
-
-        notificationSuccess.open();
-
-      } else {
-        dbUser.get(page.route.params.id).then(function(doc) {
-
-          if(doc.steps){
-            doc.steps.push({doc: {name: namePass, average_time: "N/A"}});
-          }
-          else{
-            doc.steps = [{doc: {name: namePass, average_time: "N/A"}}];
-          }
-
-          return dbUser.put(doc);
-
-        }).then(function(response) {
-
-          //Updates the base list of steps
-
-          templating.stepsList();
-
-
-        }).catch(function (err) {
-          console.log(err);
-        });
+      if(doc.steps){
+        doc.steps.push({doc: {name: namePass, average_time: "N/A"}});
       }
+      else{
+        doc.steps = [{doc: {name: namePass, average_time: "N/A"}}];
+      }
+
+      return dbUser.put(doc);
+
+    }).then(function(response) {
+
+      //Updates the base list of steps
+
+      templating.stepsList();
+
+
+    }).catch(function (err) {
+      console.log(err);
     });
   },
 }
