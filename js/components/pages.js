@@ -92,6 +92,20 @@ var pages = {
 
     });
 
+  }).on('error', function (err) {
+    // a document failed to replicate (e.g. due to permissions)
+
+    var sessionEndError = app.notification.create({
+      icon: '<i class="f7-icons">bolt</i>',
+      title: 'Session Ended',
+      text: 'Please login in again to create a new session',
+      closeButton: true,
+    });
+
+    sessionEndError.open();
+
+    error.general();
+
   });
 
 },
