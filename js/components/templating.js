@@ -43,3 +43,12 @@ templating.stepsList = function(){
   });
 
 }
+
+templating.timeList = function(){
+  var page = $$('.page[data-name="operation"]')[0].f7Page;
+
+  var timeList = {times: ""}
+
+
+
+}

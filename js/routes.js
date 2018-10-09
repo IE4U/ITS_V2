@@ -50,8 +50,11 @@ routes = [
     templateUrl: './pages/step.html',
     on: {
       pageInit: function () {
-
+        pages.steps();
       },
+      pageBeforeOut: function(){
+        timer.clear();
+      }
     }
   },
 ];

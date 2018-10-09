@@ -39,3 +39,23 @@ template.steps_list = " \
     <li class = 'add_button' id = 'add_button_steps'><i class='add_button f7-icons'>add_round</i></li> \
   </ul> \
 </div> ";
+
+template.time_list = "\
+<div class='list sortable'> \
+  <ul>\
+    {{#each times}} \
+      <li id = '{{@index}}'>\
+        <div class='item-content'> \
+          <div class='item-media'><i class='icon icon-f7'></i></div>\
+          <div class='item-inner'>\
+            <div class='item-title' >\
+                {{time}} \
+            </div>\
+          </div>\
+        </div>\
+        <div class='sortable-handler'></div>\
+      </li> \
+    {{/each}} \
+    <li class = 'add_button' id = 'add_button_times'><i class='add_button f7-icons'>add_round</i></li> \
+  </ul> \
+</div> ";

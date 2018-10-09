@@ -116,6 +116,10 @@ operations: function(){
 
 },
 
+steps: function(){
+  step.initialized();
+},
+
 initialized: function(name){
 
   $$('#create_user').attr('href', '');
