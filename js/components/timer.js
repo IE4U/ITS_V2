@@ -1,7 +1,7 @@
 var timer = {
-  initialized: function(){
-    timer.currentTime = 0;
-    timer.lapTime = 0;
+  initialized: function(currentTime, lapTime){
+    timer.currentTime = currentTime;
+    timer.lapTime = lapTime;
     timerFunctions.initialized();
   },
 
@@ -9,6 +9,7 @@ var timer = {
     //Need to add away to save the times
     $$(timer.start).off('click');
     $$(timer.reset).off('click');
+    step.addCurrentTime(timer.currentTime, timer.lapTime);
     window.clearInterval(timer.timeWindow) ;
   },
 
@@ -18,6 +19,7 @@ var timer = {
   stop: "#timerStart",
   lap: "#timerReset",
   time: "#timerTime",
+  lapEl: "#currentTime",
   currentTime: 0,
   lapTime: 0,
   timeWindow: "",
@@ -35,9 +37,14 @@ var timerFunctions = {
       timerFunctions.resetTimer();
     });
 
+    $$(timer.time).text(timeConvertions.convertTime(timer.currentTime));
+    $$(timer.lapEl).text(timeConvertions.convertTime(timer.lapTime));
   },
 
   startTimer: function(){
+
+    step.addCurrentTime(timer.currentTime, timer.lapTime);
+
     timer.timeWindow = window.setInterval(function(e){ timerFunctions.updateTime() }, 100);
 
     //lap timer controls once the timer has started
@@ -63,6 +70,8 @@ var timerFunctions = {
   stopTimer: function(){
     //The stop click event
     $$(timer.stop).once('click', function(e){
+
+      step.addCurrentTime(timer.currentTime, timer.lapTime);
 
       window.clearInterval(timer.timeWindow) ;
 
@@ -90,13 +99,18 @@ var timerFunctions = {
   },
 
   resetTimer: function(){
+    step.addTime(timer.lapTime);
+    step.addCurrentTime(timer.currentTime, timer.lapTime);
+
     timer.currentTime = 0;
     timer.lapTime = 0;
     $$(timer.time).text(timeConvertions.convertTime(timer.currentTime));
+    $$(timer.lapEl).text(timeConvertions.convertTime(timer.lapTime));
   },
 
   lapTimer: function(){
     $$(timer.lap).on('click', function(e){
+      step.addTime(timer.lapTime);
       timer.lapTime = 0;
     });
   },
@@ -105,6 +119,7 @@ var timerFunctions = {
     timer.currentTime ++;
     timer.lapTime ++;
     $$(timer.time).text(timeConvertions.convertTime(timer.currentTime));
+    $$(timer.lapEl).text(timeConvertions.convertTime(timer.lapTime));
   },
 }
 

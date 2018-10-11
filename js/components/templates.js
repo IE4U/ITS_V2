@@ -41,21 +41,39 @@ template.steps_list = " \
 </div> ";
 
 template.time_list = "\
-<div class='list sortable'> \
-  <ul>\
-    {{#each times}} \
-      <li id = '{{@index}}'>\
-        <div class='item-content'> \
-          <div class='item-media'><i class='icon icon-f7'></i></div>\
-          <div class='item-inner'>\
-            <div class='item-title' >\
-                {{time}} \
+<div class='card card-outline'>\
+  <div class='card-header'>\
+    Times\
+  </div>\
+  <div class='list inset'> \
+    <ul id = 'timesList'>\
+      {{#each times}} \
+        <li  class=\"swipeout\">\
+          <div class=\"swipeout-content item-content\">\
+          <div class=\"item-media\"><span class=\"badge\">{{@index}}</span></div>\
+            <div class=\"item-inner\">\
+              <div class=\"item-title\" style = 'margin: auto'>{{time}}</div>\
             </div>\
           </div>\
+          <div class=\"swipeout-actions-right\">\
+            <a href=\"#\" class=\"swipeout-delete\" id = '{{@index}}'>Delete</a>\
+          </div>\
+        </li> \
+      {{/each}} \
+      {{#if test}}\
+      <li  class=\"swipeout\">\
+        <div class=\"swipeout-content item-content\">\
+        <div class=\"item-media\"><span class=\"badge\">{{index}}</span></div>\
+          <div class=\"item-inner\">\
+            <div class=\"item-title\" style = 'margin: auto' id = 'currentTime'>{{base}}</div>\
+          </div>\
         </div>\
-        <div class='sortable-handler'></div>\
+        <div class=\"swipeout-actions-right\">\
+          <a href=\"#\" class=\"swipeout-delete\" id = '{{index}}'>Delete</a>\
+        </div>\
       </li> \
-    {{/each}} \
-    <li class = 'add_button' id = 'add_button_times'><i class='add_button f7-icons'>add_round</i></li> \
-  </ul> \
-</div> ";
+      {{/if}}\
+      <li class = 'add_button' id = 'add_button_times'><i class='add_button f7-icons'>add_round</i></li> \
+    </ul> \
+  </div> \
+</div>";

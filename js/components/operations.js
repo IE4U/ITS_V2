@@ -83,6 +83,7 @@ operations = {
 var operationsFunctions = {
   addStep: function(namePass) {
     var page = $$('.page[data-name="operation"]')[0].f7Page;
+    var docTemp = {};
 
     if(name.trim() == ""){
       name = "Operation";
@@ -97,12 +98,15 @@ var operationsFunctions = {
         doc.steps = [{doc: {name: namePass, average_time: "N/A"}}];
       }
 
+      docTemp = doc; //For an error check
+
       return dbUser.put(doc);
 
     }).then(function(response) {
 
       //Updates the base list of steps
 
+      page.route.context = docTemp;
       templating.stepsList();
 
 

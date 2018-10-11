@@ -46,9 +46,37 @@ templating.stepsList = function(){
 
 templating.timeList = function(){
   var page = $$('.page[data-name="operation"]')[0].f7Page;
+  var pageStep = $$('.page[data-name="step"]')[0].f7Page;
 
-  var timeList = {times: ""}
+  dbUser.get(page.route.params.id).then(function(doc) {
 
+    var arrayLength = 1;
+    var testArray = false;
+    var timeArray = [];
+    var baseTime = timeConvertions.convertTime(timer.lapTime);
+
+    if(doc.steps[pageStep.route.params.index].doc.times != undefined){
+      testArray = true;
+      if(doc.steps[pageStep.route.params.index].doc.times.length > 0){
+        arrayLength = doc.steps[pageStep.route.params.index].doc.times.length;
+        timeArray = doc.steps[pageStep.route.params.index].doc.times;
+      }
+    }
+
+    var timeList = {times: timeArray, index: arrayLength, base: baseTime , test: testArray};
+
+    var timesListCompiledTemplate = Template7.compile(template.time_list);
+    var html = timesListCompiledTemplate(timeList);
+
+    $$('#times_output').html(html);
+
+
+  }).then(function(){
+
+
+  }).catch(function (err) {
+    console.log(err);
+  });
 
 
 }
